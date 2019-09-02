@@ -7,9 +7,11 @@ import Todo from './Todo';
 function TodoList(props){
 	return(
 		<div className="todo-container">
-			{/* <div><h2>Walk the dog</h2></div> */}
+			<button onClick={props.deleteCompleted}>
+				Clear Completed
+			</button>
 			{props.todos.map(todo => {
-				return <Todo key={todo.id} todo={todo}/>
+				return <Todo key={todo.id} todo={todo} toggleTodo={props.toggleTodo}/>
 			})}
 		</div>
 	)

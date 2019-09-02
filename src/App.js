@@ -3,6 +3,7 @@ import React from 'react';
 // Import Components
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import { isTemplateElement } from '@babel/types';
 
 const todoList = [{
 	name:"Walk Dog",
@@ -34,13 +35,40 @@ class App extends React.Component {
 		// Create a new array and add the NEW todo to the list with the old ones as well
 		this.setState({todos: [...this.state.todos, newTodo]})
 	}
+
+	// Edit state so that it can be deleted
+	toggleTodo = id => {
+		console.log(id)
+
+		// Update the complete status on todo
+		this.setState({
+			todos: this.state.todos.map(todo => {
+				if (todo.id === id){
+					return {...todo, complete: !todo.complete}
+				}
+				else {
+					return todo;
+				}
+			})
+		})
+	}
+
+	// Delete a todo
+	delteCompleted = () => {
+		this.setState({
+			todos: this.state.todos.filter(todo => !todo.complete)
+		});
+	}
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
 				<TodoForm addTodo={this.addTodo}/>
-				<button>Clear Completed</button>
-				<TodoList todos={this.state.todos}/>
+				<TodoList 
+					todos={this.state.todos} 
+					deleteCompleted={this.delteCompleted}
+					toggleTodo={this.toggleTodo}
+					/>
       </div>
     );
   }
