@@ -3,7 +3,9 @@ import React from 'react';
 // Import Components
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
-import { isTemplateElement } from '@babel/types';
+
+// Importing Styles
+import './styles.css'
 
 const todoList = [{
 	name:"Walk Dog",
