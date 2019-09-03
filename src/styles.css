@@ -1,0 +1,72 @@
+/* Basic Styles */
+
+html{
+	font-size: 62.5%;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+button {
+  background-color: #e64944;
+  border: 1px solid #e64944;
+  color: white;
+  font-size: 16px;
+  padding: 6px 14px;
+}
+
+/* Main application */
+
+.app {
+	width: 70%;
+	margin: 2rem auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Header on App */
+.app > h2 {
+	text-align: center;
+	font-size: 3rem;
+	margin: 1rem;
+}
+
+/* Input and button */
+form {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	margin: 2rem 0;
+}
+
+/* Clear button and todo list */
+.todo-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  width: 100%;
+	margin: 0 auto;
+}
+
+.clear-btn {
+	margin:16px auto;
+	width: 30%;
+}
+
+.todo {
+  background-color: #e64944;
+  width: 45%;
+  text-align: center;
+  margin: 4px auto;
+	padding-left: 8px;
+	font-size: 1.8rem;
+	color: white;
+}
+
+.todo.completed {
+  background-color: #06D6A0;
+  text-decoration: line-through;
+}
