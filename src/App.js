@@ -22,8 +22,13 @@ class App extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-			todos: todoList
+			todos: window.localStorage.getItem('storedTodo') ? JSON.parse(window.localStorage.getItem('storedTodo')) : todoList
 		}
+	}
+
+	// Adding Current todo list to local storage
+	componentDidUpdate() {
+		window.localStorage.setItem('storedTodo', JSON.stringify(this.state.todos));
 	}
 
 	// Add a todo
