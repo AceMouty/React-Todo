@@ -8,7 +8,7 @@ import TodoForm from './components/TodoComponents/TodoForm';
 import './styles.css'
 
 const todoList = [{
-	name:"Walk Dog",
+	name:"First Todo",
 	id: Date.now(),
 	complete: false
 }]
@@ -22,11 +22,12 @@ class App extends React.Component {
 	constructor(){
 		super()
 		this.state = {
+			// Check to see if there is data in local storage and load it, if not then assign todoList to 'todos' state
 			todos: window.localStorage.getItem('storedTodo') ? JSON.parse(window.localStorage.getItem('storedTodo')) : todoList
 		}
 	}
 
-	// Adding Current todo list to local storage
+	// Adding Current todo list to local storage.
 	componentDidUpdate() {
 		window.localStorage.setItem('storedTodo', JSON.stringify(this.state.todos));
 	}
