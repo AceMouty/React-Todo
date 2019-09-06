@@ -3,6 +3,7 @@ import React from 'react';
 // Import Components
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import SearchBar from './components/TodoComponents/SearchBar';
 
 // Importing Styles
 import './styles.css'
@@ -23,12 +24,13 @@ class App extends React.Component {
 		super()
 		this.state = {
 			// Check to see if there is data in local storage and load it, if not then assign todoList to 'todos' state
-			todos: window.localStorage.getItem('storedTodo') ? JSON.parse(window.localStorage.getItem('storedTodo')) : todoList
+			todos: window.localStorage.getItem('storedTodo') ? JSON.parse(window.localStorage.getItem('storedTodo')) : todoList,
+			filteredTodos: []
 		}
 	}
 
 	// Adding Current todo list to local storage.
-	componentDidUpdate() {
+	componentDidUpdate(prevState) {
 		window.localStorage.setItem('storedTodo', JSON.stringify(this.state.todos));
 	}
 
@@ -67,14 +69,31 @@ class App extends React.Component {
 			todos: this.state.todos.filter(todo => !todo.complete)
 		});
 	}
+
+	filterTodos = (searchValue) => {
+		if(searchValue.length <= 0) {
+			console.log("WE FIRED WHEN SEARCH IS EMPTY")
+			this.setState({...this.state, filteredTodos: []});
+			
+		}
+		this.setState({
+			filteredTodos: this.state.todos.filter(todo => {
+				 return todo.name.toLowerCase().includes(searchValue.toLowerCase())
+			})
+		})
+	}
+
   render() {
     return (
       <div className="app-container">
 				<div className="app">
 					<h2>Welcome to your Todo App!</h2>
 					<TodoForm addTodo={this.addTodo}/>
+					<SearchBar 
+						filterTodos={this.filterTodos}
+					/>
 					<TodoList 
-						todos={this.state.todos} 
+						todos={this.state.filteredTodos.length > 0 ? this.state.filteredTodos: this.state.todos} 
 						deleteCompleted={this.delteCompleted}
 						toggleTodo={this.toggleTodo}
 					/>
